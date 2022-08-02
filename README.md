@@ -23,6 +23,7 @@
             - Key.js is the file the require the file for both dev and prod and decide which to load depend on the Node env
         - Cookie.js file contails config for cookie
         - Session.js file contains config for session and require Cookie.js file for cookie config
+        - Password.js file is for password generator and checking password equallity
 - ## Middles folder  conatins files for auths middleware
 - ## Model folder is still experimental
 - ## Public folder for the files that can be access from front end
