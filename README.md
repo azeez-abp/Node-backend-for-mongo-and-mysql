@@ -7,13 +7,13 @@
 - ## db folder contains the config for the mysql and mongo db database. in this folder is the file for each Schema
   the structure is 
   - db
-   - Mysql
-    - Tables
-    - AllTables.js contains the list of all required Schema files form the Tables forlder
-   - Mongo
-    - Tables
-    - MysqlDB.js note use for now in this version
-    - SequenlizeDB.js the Mysql file use for the database
+    - Mysql
+        - Tables
+        - AllTables.js contains the list of all required Schema files form the Tables forlder
+    - Mongo
+        - Tables
+        - MysqlDB.js note use for now in this version
+        - SequenlizeDB.js the Mysql file use for the database
 - ## Lib folder for files that contains some special function and config 
    - Lib
     - Config folder
