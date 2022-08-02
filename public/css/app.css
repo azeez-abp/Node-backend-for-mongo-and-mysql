@@ -1,0 +1,21 @@
+.input {
+    width: 20%;
+    height: 27px;
+    border-radius: 4px;
+    margin: 2px;
+    font-size: 24px;
+}
+
+.submit,
+.num {
+    width: 10%;
+    height: 17px;
+    background-color: #262626;
+    color: #fff;
+    border-radius: 7px;
+    border: 1.2px solid;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 0;
+    font-weight: 700;
+}

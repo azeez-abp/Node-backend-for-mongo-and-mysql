@@ -1,0 +1,151 @@
+npm WARN web-app@1.0.0 No description
+npm WARN web-app@1.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"ia32"})
+
++ bcrypt@5.0.1
++ uuid@8.3.2
++ jsonwebtoken@8.5.1
+added 67 packages from 124 contributors and audited 150 packages in 41.765s
+found 0 vulnerabilities
+
+PS C:\Users\ADIO ADEYORI\Desktop\web-app> git init
+git : The term 'git' is not recognized as the name of a cmdlet, function, script file, or operable
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and
+try again.
+At line:1 char:1
++ git init
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (git:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\ADIO ADEYORI\Desktop\web-app>
+PS C:\Users\ADIO ADEYORI\Desktop\web-app> node Lib/Fs/Fs.js
+close
+PS C:\Users\ADIO ADEYORI\Desktop\web-app> node Lib/Fs/Fs.js
+close
+PS C:\Users\ADIO ADEYORI\Desktop\web-app> node Lib/Fs/Fs.js
+PS C:\Users\ADIO ADEYORI\Desktop\web-app> no
+ d ddNS is faking people
+ d ddNS is faking people
+ d ddNS is faking people
+ d ddNS is faking people
+ d ddNS is faking people
+ d ddNS is faking people
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
+ d ddNS is faking people too muh in 
