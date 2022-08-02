@@ -24,7 +24,7 @@
         - Cookie.js file contails config for cookie
         - Session.js file contains config for session and require Cookie.js file for cookie config
         - Password.js file is for password generator and checking password equallity
-- ## Middles folder  conatins files for auths middleware
+- ## Middleware folder  conatins files for auths middleware
 - ## Model folder is still experimental
 - ## Public folder for the files that can be access from front end
 - ## view contains front end files for the M-V-C 
