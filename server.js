@@ -50,7 +50,8 @@ app.use(require(path.join(__dirname,'Middleware','HeaderOption')))
 app.use(cookie_parser());
 app.use(express.static(path.join(__dirname,'/public')))
 //the order is important
-app.use(passport.initialize());app.use(require('./Lib/Config/session/Session').session('mysql'))
+app.use(passport.initialize());
+app.use(require('./Lib/Config/session/Session').session())
 
 /// initalize passport to make stragy work
 //app.use(passport.session());
