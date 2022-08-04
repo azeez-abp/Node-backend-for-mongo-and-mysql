@@ -16,12 +16,20 @@
             <div class="num"></div>
             <form method="post" action="/student/post-login">
                 <div class="input-wrapper">
-                    <input type="text" name="email" class="input" />
+                   <span>Email</span>  <input type="text" name="email" class="input" />
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" name="pass" class="input" />
+                  <span>Password</span>  <input type="text" name="pass" class="input" />
                 </div>
-                <input type="submit" value="submit" class="submit" />
+                <div class="input-wrapper" >       
+                 <span>Remember me</span> 
+                 <div style="position: relative;">
+                    <input type="checkbox" name="remember" class="rem" />
+                 </div>
+                 
+                </div>
+
+                <input type="submit" value="Login" class="submit" />
             </form>
         </div>
     </section>

@@ -147,6 +147,10 @@ document.querySelector('input[name="email"]').addEventListener('change',debounci
           console.log(ev)
 },1000))
 
+document.querySelector(".login-wrapper input[type='checkbox']").addEventListener("click", function() {
+  
+  this.classList.toggle("z-10")
+})
 // debouncing((arg)=>{
 //    console.log(arg)
 // },3000)('a','b','d')
