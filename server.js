@@ -96,7 +96,7 @@ let server  = http.createServer((req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log('127.0.0.1:'.PORT  );
+    console.log('127.0.0.1:'+PORT  );
 })
 
 //alt z wrap text in vitual studeo code
