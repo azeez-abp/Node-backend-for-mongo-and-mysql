@@ -85,6 +85,8 @@ let http = require('http');
 let fs  = require('fs');
 const { initialize } = require('passport');
 
+require('./Lib/Fs/uploader/FileUploder')(app,'/api/fileupload','public/images',false,true,false,{s:2000,w:3000,h:200});
+
 let server  = http.createServer((req,res)=>{
     console.log(req.STATUS_CODE)
     //ontent type
