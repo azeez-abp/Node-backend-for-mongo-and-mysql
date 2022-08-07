@@ -1,131 +1,175 @@
-const express   = require("express");
-const uploader   = require("express-fileupload")
-const multer  = require('multer')
-var formidable = require('formidable');
-var fs = require('fs');
-const os  = require('os')
-const uploads = multer()
 
-const validator = (req,res,next)=>{
-     
-         err  = []   
-         data = null 
-         req.files.forEach(file=>{
 
-            //////////////////////
-         let  ext =   file.originalname.split(".")[file.originalname.split(".").length-1] ;
-         let allowExt  = ['jpeg','jpg','png','gif','docs','doc','xlsx','xlx','docx','txt','pdf','mp4','mp3','ogg','avi','mpeg','zip','blob','vtt','srt','sbv'];
-         if(allowExt.indexOf(ext)==-1) {
-             let e =  {err:`${ext} is not allow` }
-             err.push(e)
-            // return fileObject.cb(err,data)
-         }
-    
-         uploaderFileSize  = file.fileSize?file.fileSize:0;
-         
-         if(file.size >  1024*1024 ) {
-            let e = {err:`${file.originalname} size is more that ${uploaderFileSize/(1024*1000)} Mb which   is allow` }
-            err.push(e) 
-           // return fileObject.cb(err,data)
-         } 
-    
+const fs  =  require('fs')
+const uploadSetting    =require('./MulterSetting')
+const path = require('path');
+const Image_size  = require('image-size')
+const sharp  = require('sharp')
+const randomStr  = require('./../RandonString')
 
-         //////////////////////////////////////////////////////////////
-        })
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////VAlidator
+const imageValidator  = (img__,size,width,height)=>{
         
-       if(err.length>0){
-        return res.json(err)
-       }
-    
-     next()
+    const image_ = img__
+    let imgErr  = [];
+    let imgUrl  = []
 
-    //////////////////////////////////////////////////
-    
-}
-
-
-const fileValidator  = (file,size)=>{
-       
-              let err = [];
-            //////////////////////
-           // file.forEach(file=>{
-
-           
-            let  ext =   file.originalname.split(".")[file.originalname.split(".").length-1] ;
-            let allowExt  = ['jpeg','jpg','png','gif','docs','doc','xlsx','xlx','docx','txt','pdf','mp4','mp3','ogg','avi','mpeg','zip','blob','vtt','srt','sbv'];
-            if(allowExt.indexOf(ext)==-1) {
-                let e =  {err:`${ext} is not allow` }
-                err.push(e)
-               // return fileObject.cb(err,data)
+0               
+    image_.forEach(img=>{
+      console.log(img,'===========')
+        const dimensions = Image_size(img.path)///  //out put{ height: 225, width: 225, type: 'jpg' }
+       // console.log(dimensions,img.size,(img.size/(1024*1024)))
+        if( (img.size/(1024*1024)) > size){
+            imgErr.push(img.originalname +" size is more that "+ size +" mb")
+            if(imgUrl.indexOf(img.path) === -1){
+                imgUrl.push(img.path)
             }
-       
-            uploaderFileSize  = file.fileSize?file.fileSize:0;
-            console.log(file,size)
-            if(file.size >  size ) {
-               
-               let e = {err:`${file.originalname} size is more that ${uploaderFileSize/(1024*1000)} Mb which   is allow` }
-               err.push(e)
-
-              // return fileObject.cb(err,data)
-            } 
-        //})
-           console.log(err)
-            return err;
-   
-            //////////////////////////////////////////////////////////////
-}
-
-
-
-
-
-
-const fileSaver  = (location,size,name_)=>{
-   //////////////////////////////////////////////// 
-       let images  = [] 
-     const storage = multer.diskStorage({
-        
-        destination: function (req, file, cb) {
-           // return true
-           cb(null, location)
-        },
-        filename: function (req, file, cb) {
-          
-         let ch  =    fileValidator(file,size)  
-         if(ch.length>0){
-            cb(ch,null)
-            return false
-         }  
-           
-          //console.log(ch,"Asdsd")
-
-            if(req.session.img_){
-
-            }else{
-              req.session['img_']  = [];  
-            }
-            
-           
-          let ext  = file.originalname.split(".")[file.originalname.split(".").length-1]
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-          let newName  = file.fieldname + '-' + uniqueSuffix+"."+ext   
-          req.session.img_.push(newName) 
-          //setTimeout(()=>{fs.unlink(newName)},3000)
-          cb(null, newName)
         }
-      })
-    ////////////////////////////
-      const upload = multer({ storage: storage }).array(name_)
-      //  upload['limits']  =50000 
-     // console.log(upload)
-      return upload;
+
+        if(dimensions.width >width){
+            imgErr.push(img.originalname +" width is more that "+ (width) +"mb" )
+            if(imgUrl.indexOf(img.path) === -1){
+                imgUrl.push(img.path)
+            }
+        }
+
+        if(dimensions.height >height){
+            imgErr.push(img.originalname +" heigth is more that "+ height)
+            if(imgUrl.indexOf(img.path) === -1){
+                imgUrl.push(img.path)
+            }
+        }
+
+      
+  
+    })
+   
+    return [imgErr,imgUrl]
+
+} 
+
+
+
+
+
+
+
+
+
+////function to export
+const FileUpload  = async( 
+    router,
+    url,
+    $img_store_path,
+    isSingle=true,
+    resize_image_=false,
+    resize_option = {w:false,h:false},
+    validate=true,
+    validate_option={s:0,w:0,h:0} 
+    )=>{
+
+      let $uploader  = uploadSetting($img_store_path).upload.single('image')
+        let $uploaders  = uploadSetting($img_store_path).upload.array('image',5)
+        let whichUploader  = isSingle?$uploader:$uploaders;
+   
+router.post(url,whichUploader ,async (req, res) => {
+            const image_ = req.file?[req.file]:req.files;
+            console.log(image_,req.body,"=================>")
+            imgDir  = [];
+             let img_validation_pass  = imageValidator(image_,validate_option.s,validate_option.w,validate_option.h)
+            //console.log(imageValidator(image_,2000,200,200))
+            if(validate && img_validation_pass [0].length > 0){
+                img_validation_pass[1].forEach(imgurl=>{
+                    fs.unlink(imgurl,(err)=>{
+                        if(err) {
+                            console.log(err)
+                            res.json({err:["unlink error"]})
+                            process.exit()
+                        }
+                
+                      }
+                      )
+                }) 
+
+                res.json({err:img_validation_pass[0]})
+              //  process.exit(0);
+            }else{
+
+                  /////////////////////////////////////////////////validation pass
+                            
+            image_.forEach(img=>{
+                // require('../../../public')
+                  let new_path  = img.path.replace(/\\/g, "\/").split('public/')[1]
+                    let pathObj = {};
+                    pathObj['path']  = new_path;
+                 // imgDir.push({path:new_path }) 
+               
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////
+              function resizeImage(){
+                 const dimension = fs.existsSync(img.path)??Image_size(img.path)///out put{ height: 225, width: 225, type: 'jpg' }
+                    
+                 new_path  =  new_path.match(/.+(?=\.)/)[0]
+                 let added_to_new_path  = randomStr(6)
+               let resize_name  = new_path+'__'+added_to_new_path+'.'+dimension.type
+              // imgDir.push({path:new_path }) 
+              pathObj['path']  = resize_name
+          
+            setTimeout(()=>{
+               sharp(img.path)
+               .resize(resize_option.w,resize_option.h,'!')
+               .toFile('./public/'+resize_name)
+               .then( (e) => {
+                  
+                 fs.unlink(img.path,(err)=>{
+                         if(err) {
+                             console.log(err)
+                             res.json({err:["unlink error"]})
+                             process.exit()
+                         }
+                 
+                       }
+                       )
+                   }
+               
+               )  .catch(er=>{
+                   res.json({err:["Server encounter error"]})
+                       process.exit()  
+               })
+         
+ 
+             },4000)
+                 
+              }  
+              resize_image_ && resize_option.w && resize_option.h? resizeImage():null
+           //////////////////////end of resizeImage function   
+ 
+               imgDir.push(pathObj)
+             })/////end of forEach
+ 
+           return  res.json({image_,suc:'image upload done',img_dir:imgDir })
+
+                  ///////////////////////////////////////////validation pass
+
+            }
+
+
+        })
+
+
+        /**  "fieldname": "image",
+            "originalname": "9fHhATdMrcjV.png",
+            "encoding": "7bit",
+            "mimetype": "image/png",
+            "destination": "public/images",
+            "filename": "3REF9cdfVDmys9rhvnmXNaTKoiQbIlMV..png",
+            "path": "public\\images\\3REF9cdfVDmys9rhvnmXNaTKoiQbIlMV..png",
+            "size": 1095986 */ 
 }
 
-
-
-const fileUploader  = (req,res,next)=>{
-    console.log(req.body)
-    return uploader
-}
-
-  module.exports  = {fileSaver,fileUploader,validator}
+module.exports  = FileUpload ;
