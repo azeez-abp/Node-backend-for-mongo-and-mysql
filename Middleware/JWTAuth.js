@@ -8,6 +8,9 @@ let auth  = (req,res ,next)=>{
     if(!authValue) return res.sendStatus(401)
     let token = authValue.split(" ")[1];
     //console.log(token,'token')
+    //header.payload.signature 
+    //signsture is access by back end alone
+    //header.payload access by both front and backend
     jwt.verify(token, keys.ACCESS_TOKEN/*take it from memory*/,(err,user)=>{
       if(err) {req.cookies.session_expires= true;next()}//forbiden session has expired
       if(user){ 
