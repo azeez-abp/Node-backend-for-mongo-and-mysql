@@ -118,7 +118,7 @@ let customeCompose  = (...functions)=>{
                   all_ans.push(ans__);
                   //console.log(all_ans,'___ALL ANS')
               }
-             // ans_ +=ans;
+           
              
 
               

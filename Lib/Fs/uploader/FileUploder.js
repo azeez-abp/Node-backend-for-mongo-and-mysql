@@ -14,7 +14,7 @@ const randomStr  = require('./../RandonString')
 
 
 ///////////////////////////////////////////////////////////////////////////////////VAlidator
-const imageValidator  = (img__,size,width,height)=>{
+const imageValidator  = (img__,size,width,height,valid_image_extension)=>{
         
     const image_ = img__
     let imgErr  = [];
@@ -46,6 +46,12 @@ const imageValidator  = (img__,size,width,height)=>{
             }
         }
 
+
+     if(valid_image_extension.length >0 ){
+        if(valid_image_extension.indexOf(dimensions.type) === -1){
+            imgErr.push(img.originalname +" extension is not allow. Allow extension  are "+valid_image_extension.join(" , ")) 
+        }
+     }   
       
   
     })
@@ -70,18 +76,20 @@ const FileUpload  = async(
     isSingle=true,
     resize_image_=false,
     validate=true,
-    validate_option={s:0,w:0,h:0} 
+    validate_option={s:0,w:0,h:0} ,
+    image_input_field_name = 'image',
+    valid_image_extension = []
     )=>{
 
-      let $uploader  = uploadSetting($img_store_path).upload.single('image')
-        let $uploaders  = uploadSetting($img_store_path).upload.array('image',5)
+        let $uploader  = uploadSetting($img_store_path).upload.single(image_input_field_name)
+        let $uploaders  = uploadSetting($img_store_path).upload.array(image_input_field_name,5)
         let whichUploader  = isSingle?$uploader:$uploaders;
    
 router.post(url,whichUploader ,async (req, res) => {
             const image_ = req.file?[req.file]:req.files;
-            console.log(image_,req.body,"=================>")
+           // console.log(image_,req.body,"=================>")
             imgDir  = [];
-             let img_validation_pass  = imageValidator(image_,validate_option.s,validate_option.w,validate_option.h)
+             let img_validation_pass  = imageValidator(image_,validate_option.s,validate_option.w,validate_option.h,valid_image_extension)
             //console.log(imageValidator(image_,2000,200,200))
             if(validate && img_validation_pass [0].length > 0){
                 img_validation_pass[1].forEach(imgurl=>{
@@ -111,7 +119,7 @@ router.post(url,whichUploader ,async (req, res) => {
                
  ///////////////////////////////////////////////////////////////////////////////////////////////////////
               function resizeImage(){
-                 const dimension = fs.existsSync(img.path)??Image_size(img.path)///out put{ height: 225, width: 225, type: 'jpg' }
+                 const dimension = fs.existsSync(img.path)?Image_size(img.path):{type:img.mimetpe.split("/")[1]}///out put{ height: 225, width: 225, type: 'jpg' }
                     
                  new_path  =  new_path.match(/.+(?=\.)/)[0]
                  let added_to_new_path  = randomStr(6)
@@ -129,7 +137,8 @@ router.post(url,whichUploader ,async (req, res) => {
                          if(err) {
                              console.log(err)
                              res.json({err:["unlink error"]})
-                             process.exit()
+                             return false
+                             //process.exit()
                          }
                  
                        }

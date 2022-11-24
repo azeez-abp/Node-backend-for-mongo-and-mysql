@@ -85,8 +85,7 @@ let http = require('http');
 let fs  = require('fs');
 const { initialize } = require('passport');
 
-require('./Lib/Fs/uploader/FileUploder')(app,'/api/fileupload','public/images',false,true,false,{s:2000,w:3000,h:200});
-
+require('./Lib/Fs/uploader/FileUploder')(app,'/api/fileupload','public/images',false,true,true,{s:2000,w:30000,h:20000},'files',['gif','png']);
 let server  = http.createServer((req,res)=>{
     console.log(req.STATUS_CODE)
     //ontent type
@@ -98,7 +97,7 @@ let server  = http.createServer((req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log('127.0.0.1:'+PORT  );
+    console.log('http://127.0.0.1:'+PORT  );
 })
 
 //alt z wrap text in vitual studeo code

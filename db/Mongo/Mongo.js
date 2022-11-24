@@ -4,6 +4,7 @@ const KEYS__  = require('../../Lib/Config/keys/Key').MONGO_URI
 const ALLTABELMODELS  = require("./AllTables"); 
 // mongo.connect(KEYS__./*.mongoLocal/*/mongoLive2,{
  // console.log(KEYS__)
+ console.log(KEYS__);
   mongo.connect(KEYS__ ,{
     useNewUrlParser:true,
     useUnifiedTopology: true, 
@@ -13,7 +14,7 @@ const ALLTABELMODELS  = require("./AllTables");
     }).then(data=>{
       //console.log(data)
     return true;
-}).catch(err=>{
+}).catch(err=>{ 
   throw new Error(err+ " Detected")
 
 })
