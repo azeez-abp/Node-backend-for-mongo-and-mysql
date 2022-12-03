@@ -36,7 +36,6 @@ router.post('/student/post-register',(req,res)=>{
     function useMysqlToRegister(){
         let mysqlStudentModel  = require('../../../db/Mysql/SequenlizeDB').tables.student
         mysqlStudentModel.findAll({where:{email:req.body.email} }).then(user=>{
-          console.log(user)
            user = user?user.dataValues:null;
             if(!user)  return res.json({err:`user with email ${req.body.email} already regisred`})
 

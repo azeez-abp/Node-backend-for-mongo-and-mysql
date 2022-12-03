@@ -1,6 +1,8 @@
 const bcrypt  = require('bcrypt');
+const passport = require('passport');
 const Key = require('../Lib/Config/keys/Key');
 const LocalStrategy = require('passport-local').Strategy;
+
 
 let mongoPassportLocal   = function(passport,db) {
     let FieldMap  = {usernameField: 'email',  passwordField: 'pass' }; 
@@ -53,7 +55,7 @@ let mongoPassportLocal   = function(passport,db) {
 
 
 
-  let mysqlPassportLocal   = function(passport,db) {
+  let mysqlPassportLocal   = function(db) {
     let FieldMap  = {usernameField: 'email',  passwordField: 'pass' }; 
 
     let callbackVerify    = (username, password, done) => {
@@ -61,7 +63,7 @@ let mongoPassportLocal   = function(passport,db) {
                 
                 return done(null, false, { message: 'all fields are required' });
              }  
-            console.log(username,'PPPP')  // Match user
+         //   console.log(username,'PPPP')  // Match user
         db.findOne({ where:{ email: username} }).then(user => {
            
             user = user?user.dataValues:null;

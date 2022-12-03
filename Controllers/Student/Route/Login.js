@@ -30,7 +30,6 @@ let Login  = (router)=>{
     return  res.send("ok")
      
     async  function useMysqlToLoginJwT(){
-      console.log(" THIS IS CALL MYSQL")
          let mysqlStudentModel  = require('../../../db/Mysql/SequenlizeDB').tables.student
          let user  = await mysqlStudentModel.findOne({
              where:{
@@ -113,7 +112,7 @@ let Login  = (router)=>{
             
            ); 
           
-       
+       /////////////////////////////////////////////////////////////
            // console.log( access_token,jwt)   
        
            let refresh_token = await jwt.sign(  

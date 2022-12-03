@@ -3,8 +3,8 @@ const KEYS__  = require('../../Lib/Config/keys/Key').MONGO_URI
 //const KEYS__  = process.env.MONGO_LOCAL;
 const ALLTABELMODELS  = require("./AllTables"); 
 // mongo.connect(KEYS__./*.mongoLocal/*/mongoLive2,{
- // console.log(KEYS__)
- console.log(KEYS__);
+ // 
+ ;
   mongo.connect(KEYS__ ,{
     useNewUrlParser:true,
     useUnifiedTopology: true, 

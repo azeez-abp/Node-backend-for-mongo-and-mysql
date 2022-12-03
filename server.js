@@ -6,6 +6,11 @@ const cors  = require('cors');
 const session = require('express-session')
 const cookie_parser  =require('cookie-parser')  
 const passport  =require('passport') 
+const tables= require('./db/Mysql/SequenlizeDB');
+let http = require('http');
+let fs  = require('fs');
+
+
 let PORT   = process.env.PORT || 7000
 
 
@@ -50,22 +55,26 @@ app.use(require(path.join(__dirname,'Middleware','HeaderOption')))
 app.use(cookie_parser());
 app.use(express.static(path.join(__dirname,'/public')))
 //the order is important
+/// initalize passport to make strategy work
+//require('./Middleware/PassportAuthWithJwtStrategy').auth()(passport,tables.tables.admin)
 app.use(passport.initialize());
+
 app.use(require('./Lib/Config/session/Session').session())
 
-/// initalize passport to make stragy work
+
+
 //app.use(passport.session());
 //studentComponent(app)  
 app.use((req,res,next)=>{
-  console.log(req.session)
-  console.log(req.user)////passport-local user
-  console.log(req.logout)
+  //console.log(req.session)
+  //console.log(req.user)////passport-local user
+  //console.log(req.logout)
   next()
 })
 
 require('./Controllers/Student/Route')(app) 
-/// app.post(''require('./Controllers/Student/Route/RefrehToken') )
- console.log( )  ;
+require('./Controllers/Admin/Route')(app) 
+/// app.post(''require('./Controllers/Student/Route/RefrehToken') 
 
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname, 'view', 'index.html') );
@@ -81,13 +90,11 @@ app.get('/*',(req,res)=>{
 })
 
 
-let http = require('http');
-let fs  = require('fs');
-const { initialize } = require('passport');
+
 
 require('./Lib/Fs/uploader/FileUploder')(app,'/api/fileupload','public/images',false,true,true,{s:2000,w:30000,h:20000},'files',['gif','png']);
 let server  = http.createServer((req,res)=>{
-    console.log(req.STATUS_CODE)
+  //  console.log(req.STATUS_CODE)
     //ontent type
     // file to render 
     // url
@@ -100,4 +107,4 @@ app.listen(PORT,()=>{
     console.log('http://127.0.0.1:'+PORT  );
 })
 
-//alt z wrap text in vitual studeo code
+//alternate wrap text in vitual studeo code

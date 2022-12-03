@@ -41,7 +41,8 @@ try{
     module.exports = {
     tables:{
       student:require('./Tables/Student')(sequelize,Sequelize),
-      sessions:require('./Tables/Session')(sequelize,Sequelize)
+      sessions:require('./Tables/Session')(sequelize,Sequelize),
+      admin:require('./Tables/Admin')(sequelize,Sequelize)
 
     }
   }

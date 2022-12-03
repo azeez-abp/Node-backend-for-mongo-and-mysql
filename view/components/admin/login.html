@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/app.css" />
+    <title>Document</title>
+
+</head>
+
+<body>
+    <section class="login-section">
+        <div class="login-wrapper">
+            <div class="num"></div>
+            <form method="post" action="/admin/post-login">
+                <div class="input-wrapper">
+                   <span>Email</span>  <input type="text" name="email" class="input" />
+                </div>
+                <div class="input-wrapper">
+                  <span>Password</span>  <input type="text" name="pass" class="input" />
+                </div>
+                <div class="input-wrapper" >       
+                 <span>Remember me</span> 
+                 <div style="position: relative;">
+                    <input type="checkbox" name="remember" class="rem" />
+                 </div>
+                 
+                </div>
+
+                <input type="submit" value="Login" class="submit" />
+            </form>
+        </div>
+    </section>
+
+
+</body>
+<script type="text/javascript" src="/js/app.js"></script>
+
+</html>

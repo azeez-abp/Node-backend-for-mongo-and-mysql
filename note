@@ -1,2 +1,40 @@
 stdin_open: true # docker run -i
 tty: true        # docker run -t
+
+        useMysqlToRegister();
+        function useMysqlToRegister(){
+            let mysqlStudentModel  = require('../../../db/Mysql/SequenlizeDB').tables.admin
+            mysqlStudentModel.findAll({where:{email:'adioadeyoriazeez@gmail.com'} }).then(user=>{
+                if(user)  return res.json({err:`user with email  already regisred`})
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash('123456', salt, function(err, hash) {
+                      let data = {
+                        email : 'adioadeyoriazeez@gmail.com',
+                        fn: 'azeez',
+                        pa:hash,
+                        userId:randomStr(64)
+                      }  
+                    
+                   mysqlStudentModel.create(data).then(user => {
+                             return res.json({suc: user.email + ' registered'})
+                          })
+                          .catch(err => {
+                            return  res.json({err: user.email + ' failed to save'})
+                          })
+                     //console.log(data)
+                   
+                    })
+                })
+    
+            }).catch(err=>{
+                console.log(err, " ERRRO OCCURE")
+            })
+             
+        
+        }
+        
+        return false;
+
+
+        $ curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"
+$ # result -> {"userId":1,"username":"john"}
